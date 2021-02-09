@@ -1,10 +1,7 @@
-app: url-generator
 service: url-generator
-
 frameworkVersion: '2'
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-offline
 
 provider:
@@ -14,8 +11,8 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.handler
     events:
       - http:
-          method: post
           path: /
+          method: post
