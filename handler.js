@@ -1,7 +1,12 @@
 'use strict';
 
+class Verb {
 
-class ClassName extends Employee{
+
+
+}
+
+class ClassName extends Verb{
     constructor() {
       super();
     }
@@ -18,6 +23,7 @@ class ClassName extends Employee{
       };
       callback(null, resp);
     }
+
 }
 
 const className = new ClassName();
