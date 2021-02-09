@@ -28,6 +28,7 @@ class ClassName extends Verb{
 
 const className = new ClassName();
 module.exports.handler = (event, context, callback) => {
+  console.log(className)
   className.response(event, context, callback);
 }
 

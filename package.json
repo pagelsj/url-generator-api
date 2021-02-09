@@ -1,0 +1,29 @@
+{
+  "name": "url-generator-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "sls invoke test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagelsj/url-generator-api.git"
+  },
+  "author": "Jacques Pagels",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pagelsj/url-generator-api/issues"
+  },
+  "homepage": "https://github.com/pagelsj/url-generator-api#readme",
+  "dependencies": {
+    "ajv": "^6.12.6",
+    "aws-sdk": "^2.573.0",
+    "serverless": "^2.23.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "serverless-jest-plugin": "^0.3.0",
+    "serverless-offline": "^6.8.0"
+  }
+}

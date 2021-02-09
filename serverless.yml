@@ -3,6 +3,10 @@ frameworkVersion: '2'
 
 plugins:
   - serverless-offline
+  - serverless-jest-plugin
+custom:
+  jest:
+    collectCoverage: true
 
 provider:
   name: aws
@@ -10,8 +14,10 @@ provider:
   lambdaHashingVersion: 20201221
 
 functions:
-  hello:
-    handler: handler.handler
+  new-url:
+    handler: handlers/new-url/index.handler
+  # hello:
+  #   handler: handler.handler
     events:
       - http:
           path: /
