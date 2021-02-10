@@ -3,24 +3,21 @@ const RandomAdverb = require('../random-adverb/random-adverb');
 const RandomAdjective = require('../random-adjective/random-adjective');
 const RandomAnimal = require('../random-animal/random-animal');
 
-class UrlBuilder {
+module.exports = class UrlBuilder {
+
   constructor() {
-    const randomVerb = new RandomVerb();
-    this.verb = randomVerb.newVerb();
-
-    const randomAdverb = new RandomAdverb();
-    this.adverb = randomAdverb.newAdverb();
-
-    const randomAdjective = new RandomAdjective();
-    this.adjective = randomAdjective.newAdjective();
-
-    const randomAnimal = new RandomAnimal();
-    this.animal = randomAnimal.newAnimal();
+    this.randomVerb = new RandomVerb();
+    this.randomAdverb = new RandomAdverb();
+    this.randomAdjective = new RandomAdjective();
+    this.randomAnimal = new RandomAnimal();
   }
 
   newUrl() {
-    return `${this.adverb}-${this.verb}-${this.animal}.com`;
+    let verb = this.randomVerb.newVerb();
+    let adverb = this.randomAdverb.newAdverb();
+    let adjective = this.randomAdjective.newAdjective();
+    let animal = this.randomAnimal.newAnimal();
+
+    return `${adverb}-${verb}-${animal}.com`;
   }
 }
-
-module.exports = UrlBuilder;
