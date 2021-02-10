@@ -1,26 +1,21 @@
 const AWS = require('aws-sdk');
-const uuid = require('uuid');
 
-
-module.exports = class DynamoDBCreate {
+module.exports = class DynamoDBRetrieve {
 
   constructor(tableName, url, newUrl) {
     this.tableName = tableName;
-    this.url = url;
-    this.newUrl = newUrl;
 
     this.dynamoDb = new AWS.DynamoDB.DocumentClient();
   }
 
-  respSuccess() {
-    console.log("newUrl", this.newUrl);
+  respSuccess(results) {
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify(this.params.Item)
+      body: JSON.stringify(results)
     };
   }
 
@@ -34,18 +29,13 @@ module.exports = class DynamoDBCreate {
 
   buildParams() {
     this.params = {
-      TableName: process.env.DYNAMODB_TABLE,
-      Item: {
-        id: uuid.v1(),
-        url: this.url,
-        newUrl: this.newUrl
-      }
+      TableName: process.env.DYNAMODB_TABLE
     };
   }
 
-  addToTable() {
+  retrieveAllUrls() {
     this.buildParams();
-    return this.dynamoDb.put(this.params).promise();
+    return this.dynamoDb.scan(this.params).promise();
   }
 
 }

@@ -34,5 +34,3 @@ module.exports.handler = (event, context, callback) => {
   const newUrl = new NewUrl();
   newUrl.res(event, context, callback);
 }
-
-

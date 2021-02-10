@@ -28,12 +28,17 @@ provider:
 functions:
   new-url:
     handler: handlers/new-url/index.handler
-  # hello:
-  #   handler: handler.handler
     events:
       - http:
           path: /
           method: post
+
+  get-urls:
+    handler: handlers/get-urls/index.handler
+    events:
+      - http:
+          path: /
+          method: get
 
 resources:
   Resources:
