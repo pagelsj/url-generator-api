@@ -34,7 +34,7 @@ module.exports = class DynamoDBCreate {
 
   buildParams() {
     this.params = {
-      TableName: process.env.DYNAMODB_TABLE,
+      TableName: this.tableName,
       Item: {
         id: uuid.v1(),
         url: this.url,

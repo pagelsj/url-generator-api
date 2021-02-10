@@ -10,6 +10,9 @@ class GetUrls extends DynamoDBRetrieve{
     }
 
     res(event, context, callback) {
+      if(event.queryStringParameters && event.queryStringParameters.limit)
+        this.resultLimit = event.queryStringParameters.limit;
+
       this.retrieveAllUrls()
         .then((results) => {
 

@@ -2,8 +2,9 @@ const AWS = require('aws-sdk');
 
 module.exports = class DynamoDBRetrieve {
 
-  constructor(tableName, url, newUrl) {
+  constructor(tableName, resultLimit) {
     this.tableName = tableName;
+    this.resultLimit = resultLimit;
 
     this.dynamoDb = new AWS.DynamoDB.DocumentClient();
   }
@@ -15,7 +16,7 @@ module.exports = class DynamoDBRetrieve {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify(results)
+      body: JSON.stringify(results.Items)
     };
   }
 
@@ -29,8 +30,10 @@ module.exports = class DynamoDBRetrieve {
 
   buildParams() {
     this.params = {
-      TableName: process.env.DYNAMODB_TABLE
+      TableName: this.tableName
     };
+    if(this.resultLimit)
+      this.params['Limit'] = this.resultLimit;
   }
 
   retrieveAllUrls() {
