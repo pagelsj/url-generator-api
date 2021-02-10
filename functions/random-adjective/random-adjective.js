@@ -1,12 +1,10 @@
 const adjectives = require('../../dictionary/adjectives');
 
 class RandomAdjective {
-  constructor(){
-    this.randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-  }
 
   newAdjective() {
-    const adjective = this.randomAdjective.replace(' ', '-');
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const adjective = randomAdjective.replace(' ', '-');
 
     return adjective;
   }

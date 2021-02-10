@@ -1,34 +1,36 @@
 'use strict';
 
-const RandomVerb = require('../../functions/random-verb/random-verb');
+const DynamoDBCreate = require('../../functions/dynamoDB/create/create');
 
 const UrlBuilder = require('../../functions/url-builder/url-builder');
+const urlBuilder = new UrlBuilder();
 
 
-class ClassName extends RandomVerb{
+class NewUrl extends DynamoDBCreate{
     constructor() {
       super();
-      this.urlBuilder = new UrlBuilder();
+
+      this.tableName = process.env.DYNAMODB_TABLE;
     }
 
     res(event, context, callback) {
+      this.url = "google.com";
+      this.newUrl = urlBuilder.newUrl();
 
-      let resp = {
-        statusCode: 200,
-        body: JSON.stringify(
-          {
-            'new-url': this.urlBuilder.newUrl()
-          }
-        ),
-      };
-      callback(null, resp);
+      this.addToTable()
+        .then(() => {
+          callback(null, this.respSuccess());
+        })
+        .catch(error => {
+          callback(null, this.respError(error));
+        });
     }
 
 }
 
-const className = new ClassName();
 module.exports.handler = (event, context, callback) => {
-  className.res(event, context, callback);
+  const newUrl = new NewUrl();
+  newUrl.res(event, context, callback);
 }
 
 
