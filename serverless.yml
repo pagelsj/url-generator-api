@@ -32,6 +32,7 @@ functions:
       - http:
           path: /
           method: post
+          cors: true
 
   get-urls:
     handler: handlers/get-urls/index.handler
@@ -39,6 +40,7 @@ functions:
       - http:
           path: /
           method: get
+          cors: true
 
 resources:
   Resources:
