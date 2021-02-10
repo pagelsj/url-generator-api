@@ -5,24 +5,29 @@ const RandomAdverb = require('../../functions/random-adverb/random-adverb');
 const RandomAdjective = require('../../functions/random-adjective/random-adjective');
 const RandomAnimal = require('../../functions/random-animal/random-animal');
 
+const UrlBuilder = require('../../functions/url-builder/url-builder');
+
 
 class ClassName extends RandomVerb{
     constructor() {
       super();
+      // console.log(UrlBuilder);
+      this.urlBuilder = new UrlBuilder();
 
-      this.adverb = new RandomAdverb();
-      this.adjective = new RandomAdjective();
-      this.animal = new RandomAnimal();
+      // this.adverb = new RandomAdverb();
+      // this.adjective = new RandomAdjective();
+      // this.animal = new RandomAnimal();
     }
 
-    newUrl() {
-      let verb = this.newVerb();
-      let adverb = this.adverb.newAdverb();
-      let adj = this.adjective.newAdjective()
-      let animal = this.animal.newAnimal()
+    // newUrl() {
+    //   // let verb = this.newVerb();
+    //   // let adverb = this.adverb.newAdverb();
+    //   // let adj = this.adjective.newAdjective()
+    //   // let animal = this.animal.newAnimal()
 
-      return `${adverb}-${verb}-${animal}.com`;
-    }
+    //   // return this.urlBuilder.newUrl();
+    //   // return `${adverb}-${verb}-${animal}.com`;
+    // }
 
     res(event, context, callback) {
 
@@ -30,7 +35,7 @@ class ClassName extends RandomVerb{
         statusCode: 200,
         body: JSON.stringify(
           {
-            'new-url': this.newUrl()
+            'new-url': this.urlBuilder.newUrl()
           }
         ),
       };

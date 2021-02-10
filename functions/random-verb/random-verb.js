@@ -2,10 +2,13 @@ const verbs = require('../../dictionary/verbs');
 
 class RandomVerb {
   constructor(){
+    this.randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
   }
 
   newVerb() {
-    return verbs[Math.floor(Math.random() * verbs.length)]
+    const verb = this.randomVerb.replace(' ', '-');
+
+    return verb;
   }
 }
 
