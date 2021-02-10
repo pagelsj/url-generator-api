@@ -14,7 +14,8 @@ class NewUrl extends DynamoDBCreate{
     }
 
     res(event, context, callback) {
-      this.url = "google.com";
+      const body = JSON.parse(event.body);
+      this.url = body.url;
       this.newUrl = urlBuilder.newUrl();
 
       this.addToTable()
