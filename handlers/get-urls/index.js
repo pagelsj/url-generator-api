@@ -1,12 +1,14 @@
 'use strict';
 
 const DynamoDBRetrieve = require('../../functions/dynamoDB/retrieve/retrieve');
+const ResponseFactory = require('../../functions/response/response.factory');
 
 class GetUrls extends DynamoDBRetrieve{
     constructor() {
       super();
 
       this.tableName = process.env.DYNAMODB_TABLE;
+      this.responseFactory = new ResponseFactory();
     }
 
     res(event, context, callback) {
@@ -15,12 +17,12 @@ class GetUrls extends DynamoDBRetrieve{
 
       this.retrieveAllUrls()
         .then((results) => {
-
-          callback(null, this.respSuccess(results));
+          let success = this.responseFactory.createSuccess(results.Items);
+          callback(null, success);
         })
-        .catch(error => {
-
-          callback(null, this.respError(error));
+        .catch(err => {
+          let error = this.responseFactory.createError(err);
+          callback(null, error);
         });
     }
 

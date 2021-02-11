@@ -1,6 +1,7 @@
 'use strict';
 
 const DynamoDBCreate = require('../../functions/dynamoDB/create/create');
+const ResponseFactory = require('../../functions/response/response.factory');
 
 const UrlBuilder = require('../../functions/url-builder/url-builder');
 const urlBuilder = new UrlBuilder();
@@ -11,6 +12,7 @@ class NewUrl extends DynamoDBCreate{
       super();
 
       this.tableName = process.env.DYNAMODB_TABLE;
+      this.responseFactory = new ResponseFactory();
     }
 
     res(event, context, callback) {
@@ -21,10 +23,12 @@ class NewUrl extends DynamoDBCreate{
 
       this.addToTable()
         .then(() => {
-          callback(null, this.respSuccess());
+          let success = this.responseFactory.createSuccess(this.params.Item);
+          callback(null, success);
         })
-        .catch(error => {
-          callback(null, this.respError(error));
+        .catch(err => {
+          let error = this.responseFactory.createError(err);
+          callback(null, error);
         });
     }
 
