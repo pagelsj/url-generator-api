@@ -1,22 +1,15 @@
-const RandomVerb = require('../random-verb/random-verb');
-const RandomAdverb = require('../random-adverb/random-adverb');
-const RandomAdjective = require('../random-adjective/random-adjective');
-const RandomAnimal = require('../random-animal/random-animal');
+const RandomWord = require('../random-word/random-word');
 
 module.exports = class UrlBuilder {
 
   constructor() {
-    this.randomVerb = new RandomVerb();
-    this.randomAdverb = new RandomAdverb();
-    this.randomAdjective = new RandomAdjective();
-    this.randomAnimal = new RandomAnimal();
+    this.randomWord = new RandomWord();
   }
 
   newUrl() {
-    let verb = this.randomVerb.newVerb();
-    let adverb = this.randomAdverb.newAdverb();
-    let adjective = this.randomAdjective.newAdjective();
-    let animal = this.randomAnimal.newAnimal();
+    let verb = this.randomWord.newWord("verb");
+    let adverb = this.randomWord.newWord("adverb");
+    let animal = this.randomWord.newWord("animal");
 
     return `${adverb}-${verb}-${animal}.com`;
   }
