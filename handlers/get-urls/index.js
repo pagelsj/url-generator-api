@@ -5,9 +5,8 @@ const ResponseFactory = require('../../functions/response/response.factory');
 
 class GetUrls extends DynamoDBRetrieve{
     constructor() {
-      super();
+      super(process.env.DYNAMODB_TABLE);
 
-      this.tableName = process.env.DYNAMODB_TABLE;
       this.responseFactory = new ResponseFactory();
     }
 

@@ -9,9 +9,8 @@ const urlBuilder = new UrlBuilder();
 
 class NewUrl extends DynamoDBCreate{
     constructor() {
-      super();
+      super(process.env.DYNAMODB_TABLE);
 
-      this.tableName = process.env.DYNAMODB_TABLE;
       this.responseFactory = new ResponseFactory();
     }
 
